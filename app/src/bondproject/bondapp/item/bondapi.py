@@ -5,8 +5,8 @@ import json
 from datetime import datetime, timedelta
 
 
-def get_data(url, key, _max):
-    key = key.encode()
+def get_data(_max):
+    key = OPEN_API_KEY.encode()
 
     # 현재 시간이 만일 00시-16시이면 어제 시간을 가져옴
     now_date = datetime.now().strftime('%Y%m%d')
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     import pandas as pd
     from pandas.io.json import json_normalize 
     # 데이터프레임 타입으로 변환하기
-    org_data = get_data(url, OPEN_API_KEY, 10)
+    org_data = get_data(30)
 
     dct_data = dict()
     for name in COLUMN_NAMES:
