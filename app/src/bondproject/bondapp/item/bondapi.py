@@ -54,10 +54,15 @@ def _get_json_data(page, _max):
 
 COLUMN_NAMES = [
         'scrsItmsKcdNm',  # 유가증권종목종류코드명
+        'bondIssuCurCd', # 채권발행통화코드
+        'bondIsurNm', # 채권발행인명
         'bondIssuDt',  # 채권발행일자
         'bondExprDt',  # 채권만기일자
         'bondIssuAmt',  # 채권발행금액
-        'bondSrfcInrt'  # 채권표면이율
+        'bondIntTcdNm', # 채권이자유형코드명
+        'bondSrfcInrt',  # 채권표면이율
+        'intPayCyclCtt', # 이자지급주기내용
+        'kisScrsItmsKcdNm', # 한국신용평가유가증권종목종류코드명
     ]
 
 
