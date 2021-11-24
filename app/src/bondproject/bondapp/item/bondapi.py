@@ -4,6 +4,7 @@ from urllib.parse import urlencode, quote_plus
 import json
 from datetime import datetime, timedelta
 
+
 def get_json_item(page, _max):
     key = OPEN_API_KEY.encode()
 
