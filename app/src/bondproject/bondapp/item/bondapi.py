@@ -4,30 +4,7 @@ from urllib.parse import urlencode, quote_plus
 import json
 from datetime import datetime, timedelta
 
-
-def get_data(page, _max):
-    item_list = _get_json_data(page, _max)
-    use_data_list = []
-    for item in item_list:
-        use_data = dict()
-        for name in COLUMN_NAMES:
-            use_data[name] = item[name]
-        
-        use_data_list.append(use_data)
-    return use_data_list
-
-
-def _get_yst(str_date):  # 문자열 날짜 ex) '20180921'
-    dateformat = '%Y%m%d'
-    dte = datetime.strptime(str_date, dateformat)
-    return (dte-timedelta(days=1)).strftime(dateformat)
-
-
-def _get_time():  # 현재 시간
-    return datetime.now().strftime('%H')
-
-
-def _get_json_data(page, _max):
+def get_json_item(page, _max):
     key = OPEN_API_KEY.encode()
 
     # 현재 시간이 만일 00시-16시이면 어제 시간을 가져옴
@@ -52,6 +29,28 @@ def _get_json_data(page, _max):
         print('SERVICE ERROR: http error')
 
 
+def get_data(json_item, column):
+    item_list = json_item
+    use_data_list = []
+    for item in item_list:
+        use_data = dict()
+        for name in column:
+            use_data[name] = item[name]
+        
+        use_data_list.append(use_data)
+    return use_data_list
+
+
+def _get_yst(str_date):  # 문자열 날짜 ex) '20180921'
+    dateformat = '%Y%m%d'
+    dte = datetime.strptime(str_date, dateformat)
+    return (dte-timedelta(days=1)).strftime(dateformat)
+
+
+def _get_time():  # 현재 시간
+    return datetime.now().strftime('%H')
+
+
 COLUMN_NAMES = [
         'scrsItmsKcdNm',  # 유가증권종목종류코드명
         'bondIssuCurCd', # 채권발행통화코드
@@ -74,14 +73,20 @@ if __name__ == '__main__':
     import pandas as pd
     from pandas.io.json import json_normalize 
     # 데이터프레임 타입으로 변환하기
-    org_data = get_data(30, 30)
+    item = get_json_item(30, 30)
+    columns = ['bondIsurNm', # 채권발행인명
+        'bondIssuDt',  # 채권발행일자
+        'bondExprDt',  # 채권만기일자
+        'bondIssuAmt',  # 채권발행금액
+        ]
+    org_data = get_data(item, columns)
 
     dct_data = dict()
-    for name in COLUMN_NAMES:
+    for name in columns:
         dct_data[name] = []
     
     for i in range(len(org_data)):
-        for c_name in COLUMN_NAMES:
+        for c_name in columns:
             dct_data[c_name].append(org_data[i][c_name])
     
     print(pd.DataFrame(dct_data))
