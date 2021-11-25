@@ -7,9 +7,11 @@
 칼럼명에 따른 해당 데이터 추출이 가능하게 코드 변경할 것.
 
 ## 11.25
-- 데이터 가공 파일 생성
-	- manipulations.Calc
-- bondapi.Change 객체는 Calc객체를 상속 받고 내부에서 calc_all()함수를 이용하여 데이터 가공
-- bondapp/item -> bondapp/request로 rename
-- src -> server rename
+* 데이터 가공 파일 생성
+	- manipulation.Calc
+* bondapp/item -> bondapp/request로 rename
+* src -> server rename
 
+- bondapi.Change 객체는 Calc객체를 상속 받고 내부에서 calc_all()함수를 이용하여 데이터 가공
+- Calc.__str__ 만들기. DataFrame으로 보여주기
+- bondapi test case manipulation에서 test하도록 옮기기
