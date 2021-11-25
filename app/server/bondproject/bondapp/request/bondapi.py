@@ -75,12 +75,7 @@ if __name__ == '__main__':
     from pandas.io.json import json_normalize 
     # 데이터프레임 타입으로 변환하기
     item = get_json_item(100, 30)
-    columns = ['bondIsurNm', # 채권발행인명
-        'bondIssuDt',  # 채권발행일자
-        'bondExprDt',  # 채권만기일자
-        'bondIssuAmt',  # 채권발행금액
-        'kisScrsItmsKcdNm', # 한국신용평가유가증권종목종류코드명
-        ]
+    columns = COLUMN_NAMES
     org_data = get_data(item, columns)
 
     dct_data = dict()
