@@ -2,12 +2,12 @@
 
 ## Tree
 	app
-	└─src
+	└─server
 	    ├─.idea
 	    │  └─inspectionProfiles
 	    ├─bondproject
 	    │  ├─bondapp
-	    │  │  ├─item
+	    │  │  ├─request
 	    │  │  └─migrations
 	    │  └─bondproject
 	    │      └─__pycache__
