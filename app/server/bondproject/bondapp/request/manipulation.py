@@ -1,5 +1,7 @@
 import pandas as pd
 
+
+# 계산에 필요한 칼럼
 essential_columns = [
         'bondIssuDt',  # 채권발행일자
         'bondExprDt',  # 채권만기일자
