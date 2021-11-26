@@ -10,10 +10,30 @@ import pandas as pd
 
 url = 'http://apis.data.go.kr/1160100/service/GetBondIssuInfoService/getBondBasiInfo'
 OPEN_API_KEY = 'YGMVpil/AHi/wBtNL1n90yhai6K4kIez7xRbCUDpiYWzd4cuhNahumycXmM/7jWmILuERvt9hTzE1YBo+DnDmg=='
+COLUMN_NAMES = [
+        'scrsItmsKcdNm',  # 유가증권종목종류코드명
+        'bondIssuCurCd', # 채권발행통화코드
+        'bondIsurNm', # 채권발행인명
+        'bondIssuDt',  # 채권발행일자
+        'bondExprDt',  # 채권만기일자
+        'bondIssuAmt',  # 채권발행금액
+        'bondIntTcdNm', # 채권이자유형코드명
+        'bondSrfcInrt',  # 채권표면이율
+        'intPayCyclCtt', # 이자지급주기내용
+        'kisScrsItmsKcdNm', # 한국신용평가유가증권종목종류코드명
+    ]
+MAX_DATA_AMOUNT = 20000
+
+
+class OverMaxDataAmount(Exception):  # 검색할 데이터 수 초과시 에러
+    def __init__(self):
+        super().__init__(f'검색할 데이터 수가 최대치를 넘었습니다. 최대: {MAX_DATA_AMOUNT}')
 
 
 def get_json_item(page, _max):
     key = OPEN_API_KEY.encode()
+    if _max>MAX_DATA_AMOUNT:
+        raise OverMaxDataAmount
 
     # 현재 시간이 만일 00시-16시이면 어제 시간을 가져옴
     now_date = datetime.now().strftime('%Y%m%d')
@@ -66,17 +86,3 @@ class Change(Calc):
             for c_name in column:
                 dct_data[c_name].append(self.data[i][c_name])
         return pd.DataFrame(dct_data)
-
-
-COLUMN_NAMES = [
-        'scrsItmsKcdNm',  # 유가증권종목종류코드명
-        'bondIssuCurCd', # 채권발행통화코드
-        'bondIsurNm', # 채권발행인명
-        'bondIssuDt',  # 채권발행일자
-        'bondExprDt',  # 채권만기일자
-        'bondIssuAmt',  # 채권발행금액
-        'bondIntTcdNm', # 채권이자유형코드명
-        'bondSrfcInrt',  # 채권표면이율
-        'intPayCyclCtt', # 이자지급주기내용
-        'kisScrsItmsKcdNm', # 한국신용평가유가증권종목종류코드명
-    ]
