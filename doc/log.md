@@ -12,6 +12,6 @@
 * bondapp/item -> bondapp/request로 rename
 * src -> server rename
 
+## 11.26
 - bondapi.Change 객체는 Calc객체를 상속 받고 내부에서 calc_all()함수를 이용하여 데이터 가공
-- Calc.__str__ 만들기. DataFrame으로 보여주기
-- bondapi test case manipulation에서 test하도록 옮기기
+* bondapi test case manipulation에서 test하도록 옮기기

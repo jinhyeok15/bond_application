@@ -68,22 +68,3 @@ COLUMN_NAMES = [
 
 url = 'http://apis.data.go.kr/1160100/service/GetBondIssuInfoService/getBondBasiInfo'
 OPEN_API_KEY = 'YGMVpil/AHi/wBtNL1n90yhai6K4kIez7xRbCUDpiYWzd4cuhNahumycXmM/7jWmILuERvt9hTzE1YBo+DnDmg=='
-
-
-if __name__ == '__main__':
-    import pandas as pd
-    from pandas.io.json import json_normalize 
-    # 데이터프레임 타입으로 변환하기
-    item = get_json_item(100, 30)
-    columns = COLUMN_NAMES
-    org_data = get_data(item, columns)
-
-    dct_data = dict()
-    for name in columns:
-        dct_data[name] = []
-    
-    for i in range(len(org_data)):
-        for c_name in columns:
-            dct_data[c_name].append(org_data[i][c_name])
-    
-    print(pd.DataFrame(dct_data))

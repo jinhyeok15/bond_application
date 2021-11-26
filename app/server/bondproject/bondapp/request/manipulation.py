@@ -1,3 +1,5 @@
+import pandas as pd
+
 essential_columns = [
         'bondIssuDt',  # 채권발행일자
         'bondExprDt',  # 채권만기일자
@@ -33,6 +35,15 @@ class Calc:
                     exst_col[i] = True
         for i, b in enumerate(exst_col):
             if not b: raise CannotCalculateError(i)
+
+        # 데이터프레임 형식으로 보여주기
+        dct_data = dict()
+        for name in columns:
+            dct_data[name] = []
+        for i in range(len(data)):
+            for c_name in columns:
+                dct_data[c_name].append(data[i][c_name])
+        print(pd.DataFrame(dct_data))
 
 
 if __name__=='__main__':
