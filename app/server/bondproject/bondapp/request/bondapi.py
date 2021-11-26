@@ -56,9 +56,6 @@ def _get_time():  # 현재 시간
 
 
 class Change(Calc):
-    # def __init__(self, data):
-    #     super().__init__(data)
-    
     def df(self):
         column = self.column
         # 데이터프레임 형식으로 보여주기
