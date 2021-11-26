@@ -56,8 +56,8 @@ def _get_time():  # 현재 시간
 
 
 class Change(Calc):
-    def __init__(self, data):
-        super().__init__(data)
+    # def __init__(self, data):
+    #     super().__init__(data)
     
     def df(self):
         column = self.column

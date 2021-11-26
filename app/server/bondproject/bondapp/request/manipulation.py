@@ -51,6 +51,6 @@ if __name__=='__main__':
     
     data = get_data(item, essential_columns)
     blank_data = []
-    a = Change(data)
+    a = Change(blank_data)
     df = a.df()
     print(df)
