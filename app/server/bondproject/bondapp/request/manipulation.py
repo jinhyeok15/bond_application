@@ -3,11 +3,13 @@ from datetime import datetime as dte
 
 # 계산에 필요한 칼럼
 essential_columns = [
+        'scrsItmsKcdNm',  # 유가증권종목종류코드명
         'bondIssuDt',  # 채권발행일자
         'bondExprDt',  # 채권만기일자
         'bondIntTcdNm', # 채권이자유형코드명
         'bondSrfcInrt',  # 채권표면이율
         'intPayCyclCtt', # 이자지급주기내용
+        'kisScrsItmsKcdNm', # 한국신용평가유가증권종목종류코드명
     ]
 
 
@@ -78,6 +80,4 @@ if __name__=='__main__':
     blank_data = []
     a = Change(data)
     df = a.df()
-    b = Calc(data)
-    cycle = b.cycle_delta()
-    print(cycle)
+    print(df)
