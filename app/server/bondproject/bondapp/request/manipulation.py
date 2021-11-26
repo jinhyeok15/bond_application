@@ -30,7 +30,7 @@ class Calc:
             raise BlankDataError
         
         # 필요한 칼럼이 존재하는지 여부 확인. 없으면 raise error
-        self.column = data[0]
+        self.column = self.data[0]
         exst_col = [False for i in range(len(essential_columns))]
         for c in self.column:
             for i, ec in enumerate(essential_columns):
