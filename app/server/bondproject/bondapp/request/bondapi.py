@@ -17,7 +17,7 @@ def get_json_item(page, _max):
 
     # 현재 시간이 만일 00시-16시이면 어제 시간을 가져옴
     now_date = datetime.now().strftime('%Y%m%d')
-    if 0<=int(_get_time())<=16:
+    if 0<=int(datetime.now().strftime('%H'))<=16:
         now_date = _get_yst(now_date)
     
     queryParams = '?' + urlencode({
@@ -53,10 +53,6 @@ def _get_yst(str_date):  # 문자열 날짜 ex) '20180921'
     dateformat = '%Y%m%d'
     dte = datetime.strptime(str_date, dateformat)
     return (dte-timedelta(days=1)).strftime(dateformat)
-
-
-def _get_time():  # 현재 시간
-    return datetime.now().strftime('%H')
 
 
 class Change(Calc):
