@@ -29,9 +29,9 @@ class Calc:
             raise BlankDataError
         
         # 필요한 칼럼이 존재하는지 여부 확인. 없으면 raise error
-        columns = data[0]
+        l_col = data[0]
         exst_col = [False for i in range(len(essential_columns))]
-        for c in columns:
+        for c in l_col:
             for i, ec in enumerate(essential_columns):
                 if ec == c:
                     exst_col[i] = True
@@ -40,10 +40,10 @@ class Calc:
 
         # 데이터프레임 형식으로 보여주기
         dct_data = dict()
-        for name in columns:
+        for name in l_col:
             dct_data[name] = []
         for i in range(len(data)):
-            for c_name in columns:
+            for c_name in l_col:
                 dct_data[c_name].append(data[i][c_name])
         print(pd.DataFrame(dct_data))
 
@@ -57,8 +57,8 @@ if __name__=='__main__':
         'bondIsurNm', # 채권발행인명
         'bondIssuDt',  # 채권발행일자
     ]
-    true_columns = essential_columns
-    data = get_data(item, true_columns)
+    
+    data = get_data(item, essential_columns)
     blank_data = []
     a = Calc(data)
     a
