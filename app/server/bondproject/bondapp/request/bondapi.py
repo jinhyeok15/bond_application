@@ -8,6 +8,10 @@ from manipulation import Calc
 import pandas as pd
 
 
+url = 'http://apis.data.go.kr/1160100/service/GetBondIssuInfoService/getBondBasiInfo'
+OPEN_API_KEY = 'YGMVpil/AHi/wBtNL1n90yhai6K4kIez7xRbCUDpiYWzd4cuhNahumycXmM/7jWmILuERvt9hTzE1YBo+DnDmg=='
+
+
 def get_json_item(page, _max):
     key = OPEN_API_KEY.encode()
 
@@ -80,7 +84,3 @@ COLUMN_NAMES = [
         'intPayCyclCtt', # 이자지급주기내용
         'kisScrsItmsKcdNm', # 한국신용평가유가증권종목종류코드명
     ]
-
-
-url = 'http://apis.data.go.kr/1160100/service/GetBondIssuInfoService/getBondBasiInfo'
-OPEN_API_KEY = 'YGMVpil/AHi/wBtNL1n90yhai6K4kIez7xRbCUDpiYWzd4cuhNahumycXmM/7jWmILuERvt9hTzE1YBo+DnDmg=='
