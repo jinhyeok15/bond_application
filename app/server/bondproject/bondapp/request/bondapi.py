@@ -4,6 +4,9 @@ from urllib.parse import urlencode, quote_plus
 import json
 from datetime import datetime, timedelta
 
+from manipulation import Calc
+import pandas as pd
+
 
 def get_json_item(page, _max):
     key = OPEN_API_KEY.encode()
@@ -50,6 +53,22 @@ def _get_yst(str_date):  # 문자열 날짜 ex) '20180921'
 
 def _get_time():  # 현재 시간
     return datetime.now().strftime('%H')
+
+
+class Change(Calc):
+    def __init__(self, data):
+        super().__init__(data)
+    
+    def df(self):
+        column = self.column
+        # 데이터프레임 형식으로 보여주기
+        dct_data = dict()
+        for name in column:
+            dct_data[name] = []
+        for i in range(len(self.data)):
+            for c_name in column:
+                dct_data[c_name].append(self.data[i][c_name])
+        return pd.DataFrame(dct_data)
 
 
 COLUMN_NAMES = [

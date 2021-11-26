@@ -15,3 +15,4 @@
 ## 11.26
 - bondapi.Change 객체는 Calc객체를 상속 받고 내부에서 calc_all()함수를 이용하여 데이터 가공
 * bondapi test case manipulation에서 test하도록 옮기기
+* Change객체 생성 및 df() 정의 후 test

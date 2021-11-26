@@ -29,27 +29,18 @@ class Calc:
             raise BlankDataError
         
         # 필요한 칼럼이 존재하는지 여부 확인. 없으면 raise error
-        l_col = data[0]
+        self.column = data[0]
         exst_col = [False for i in range(len(essential_columns))]
-        for c in l_col:
+        for c in self.column:
             for i, ec in enumerate(essential_columns):
                 if ec == c:
                     exst_col[i] = True
         for i, b in enumerate(exst_col):
             if not b: raise CannotCalculateError(i)
 
-        # 데이터프레임 형식으로 보여주기
-        dct_data = dict()
-        for name in l_col:
-            dct_data[name] = []
-        for i in range(len(data)):
-            for c_name in l_col:
-                dct_data[c_name].append(data[i][c_name])
-        print(pd.DataFrame(dct_data))
-
 
 if __name__=='__main__':
-    from bondapi import get_json_item, get_data
+    from bondapi import get_json_item, get_data, Change
     item = get_json_item(1, 5)
     false_columns = [
         'scrsItmsKcdNm',  # 유가증권종목종류코드명
@@ -60,5 +51,6 @@ if __name__=='__main__':
     
     data = get_data(item, essential_columns)
     blank_data = []
-    a = Calc(data)
-    a
+    a = Change(data)
+    df = a.df()
+    print(df)
