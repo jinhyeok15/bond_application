@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import datetime as dte
 
 
 # 계산에 필요한 칼럼
@@ -38,6 +39,22 @@ class Calc:
         for i, b in enumerate(exst_col):
             if not b: raise CannotCalculateError(i)
 
+    def bond_maturity(self):  # 채권의 발행일, 만기일을 통해 만기 계산
+        l_matur = []
+        for d in self.data:
+            issu = d['bondIssuDt']
+            expr = d['bondExprDt']
+            date_format = "%Y%m%d"
+            dt_issu = dte.strptime(issu, date_format)
+            dt_expr = dte.strptime(expr, date_format)
+            delta = (dt_expr-dt_issu).days/365
+            if .4<=delta-int(delta)<=.6:  # 반개월 반영
+                delta = int(delta)+.5
+            else:
+                delta = int(round(delta))
+            l_matur.append(delta)
+        return l_matur
+
 
 if __name__=='__main__':
     from bondapi import get_json_item, get_data, Change
@@ -53,4 +70,6 @@ if __name__=='__main__':
     blank_data = []
     a = Change(data)
     df = a.df()
-    print(df)
+    b = Calc(data)
+    maturity_list = b.bond_maturity()
+    print(maturity_list)
