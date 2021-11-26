@@ -18,3 +18,4 @@
 * Change객체 생성 및 df() 정의 후 test
 * README rename Portal -> Documentation
 * Calc.bond_maturity() 추가
+* Calc.cycle_delta() 추가

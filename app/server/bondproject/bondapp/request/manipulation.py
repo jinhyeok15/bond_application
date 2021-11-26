@@ -37,7 +37,8 @@ class Calc:
         for i, b in enumerate(exst_col):
             if not b: raise CannotCalculateError(i)
 
-    def bond_maturity(self):  # 채권의 발행일, 만기일을 통해 만기 계산
+    # 채권의 발행일, 만기일을 통해 만기 계산
+    def bond_maturity(self):
         l_matur = []
         for d in self.data:
             issu = d['bondIssuDt']
@@ -53,10 +54,19 @@ class Calc:
             l_matur.append(delta)
         return l_matur
 
+    # 이자지급주기 델타 계산: 개월/12
+    def cycle_delta(self):
+        import re  # str.replace()가 작동 안됨. 대신 re모듈 사용
+        l_cycle = []
+        for d in self.data:
+            str_paycycl = re.sub('개월', '', d['intPayCyclCtt'])
+            l_cycle.append(int(str_paycycl)/12)
+        return l_cycle
+
 
 if __name__=='__main__':
     from bondapi import get_json_item, get_data, Change
-    item = get_json_item(1, 5)
+    item = get_json_item(30, 10)
     false_columns = [
         'scrsItmsKcdNm',  # 유가증권종목종류코드명
         'bondIssuCurCd', # 채권발행통화코드
@@ -69,5 +79,5 @@ if __name__=='__main__':
     a = Change(data)
     df = a.df()
     b = Calc(data)
-    maturity_list = b.bond_maturity()
-    print(maturity_list)
+    cycle = b.cycle_delta()
+    print(cycle)
