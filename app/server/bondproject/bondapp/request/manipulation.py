@@ -91,20 +91,3 @@ class Calc(Filter):
             str_paycycl = re.sub('개월', '', d['intPayCyclCtt'])
             l_cycle.append(int(str_paycycl)/12)
         return l_cycle    
-
-
-if __name__=='__main__':
-    from bondapi import get_json_item, get_data, Change
-    item = get_json_item(30, 10)
-    false_columns = [
-        'scrsItmsKcdNm',  # 유가증권종목종류코드명
-        'bondIssuCurCd', # 채권발행통화코드
-        'bondIsurNm', # 채권발행인명
-        'bondIssuDt',  # 채권발행일자
-    ]
-    
-    data = get_data(item, essential_columns)
-    blank_data = []
-    a = Change(data)
-    print(f"length: {len(a.filt_cycle('6개월'))}")
-    print(a.df())
