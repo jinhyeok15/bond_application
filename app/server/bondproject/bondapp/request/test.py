@@ -14,3 +14,6 @@ blank_data = []
 a = Change(data)
 print(f"length: {len(a.filt_cycle('6개월'))}")
 print(a.df())
+
+# BlankError, CannotCalculateError 잘 뜨는지 확인
+# 필터 함수 test
