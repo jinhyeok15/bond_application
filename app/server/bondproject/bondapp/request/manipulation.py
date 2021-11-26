@@ -1,4 +1,3 @@
-import pandas as pd
 from datetime import datetime as dte
 
 
@@ -6,7 +5,6 @@ from datetime import datetime as dte
 essential_columns = [
         'bondIssuDt',  # 채권발행일자
         'bondExprDt',  # 채권만기일자
-        'bondIssuAmt',  # 채권발행금액
         'bondIntTcdNm', # 채권이자유형코드명
         'bondSrfcInrt',  # 채권표면이율
         'intPayCyclCtt', # 이자지급주기내용
