@@ -20,3 +20,4 @@
 * Calc.bond_maturity() 추가
 * Calc.cycle_delta() 추가
 * essential_columns에 칼럼 추가 => 유가증권종목종류코드명, 한국신용평가유가증권종목종류코드명
+* Filter 객체 추가

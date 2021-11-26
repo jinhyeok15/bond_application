@@ -1,4 +1,5 @@
 from datetime import datetime as dte
+from functools import wraps
 
 
 # 계산에 필요한 칼럼
@@ -23,10 +24,11 @@ class BlankDataError(Exception):  # 데이터가 들어있지 않음
         super().__init__('데이터가 존재하지 않습니다.')
 
 
-class Calc:
+# filter
+class Filter:
     def __init__(self, data):
         self.data = data
-        if not data:
+        if not self.data:
             raise BlankDataError
         
         # 필요한 칼럼이 존재하는지 여부 확인. 없으면 raise error
@@ -38,7 +40,32 @@ class Calc:
                     exst_col[i] = True
         for i, b in enumerate(exst_col):
             if not b: raise CannotCalculateError(i)
+    
+    def filter(func):
+        @wraps(func)
+        def wrapper(self, filtnm):
+            li = []
+            for d in self.data:
+                if d[func()]==filtnm:
+                    li.append(d)
+            self.data = li
+            return self.data
+        return wrapper
 
+    @filter
+    def filt_bndnm():  # 채권 종목별 조회
+        return 'scrsItmsKcdNm'
+
+    @filter
+    def filt_ipaynm():  # 이자 지급 종류별 조회
+        return 'bondIntTcdNm'
+
+    @filter
+    def filt_cycle():
+        return 'intPayCyclCtt'
+
+
+class Calc(Filter):
     # 채권의 발행일, 만기일을 통해 만기 계산
     def bond_maturity(self):
         l_matur = []
@@ -63,7 +90,7 @@ class Calc:
         for d in self.data:
             str_paycycl = re.sub('개월', '', d['intPayCyclCtt'])
             l_cycle.append(int(str_paycycl)/12)
-        return l_cycle
+        return l_cycle    
 
 
 if __name__=='__main__':
@@ -79,5 +106,5 @@ if __name__=='__main__':
     data = get_data(item, essential_columns)
     blank_data = []
     a = Change(data)
-    df = a.df()
-    print(df)
+    print(f"length: {len(a.filt_cycle('6개월'))}")
+    print(a.df())
