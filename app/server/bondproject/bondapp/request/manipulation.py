@@ -61,7 +61,7 @@ class Filter:
         return 'bondIntTcdNm'
 
     @filter
-    def filt_cycle():
+    def filt_cycle():  # 이자 지급 주기별 조회
         return 'intPayCyclCtt'
 
 
