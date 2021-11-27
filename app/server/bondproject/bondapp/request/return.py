@@ -9,7 +9,7 @@ def return_by_rating(search_title):
     ]
 
     soup = _get_soup(RETURN_URL)
-    date = get_date()
+    date = get_date(soup)
     tbody = soup.select_one('tbody')
     tables = tbody.select('tr')
     titles = tbody.select('tr > td.fc_blue_dk')
@@ -26,8 +26,7 @@ def return_by_rating(search_title):
     return dct_data
 
 
-def get_date():
-    soup = _get_soup(RETURN_URL)
+def get_date(soup):
     return soup.find('input', {'title':'기간선택'}).get('value')
 
 
