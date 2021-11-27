@@ -28,3 +28,6 @@
 > Selenium으로 KIS 수익률 테이블 크롤링 후, 데이터베이스에 저장
 * test.py 추가
 * const한 변수명 전부 대문자로 변경
+* return.py get_date() -> get_date(soup)
+* fin => 채권 계산, 시각화 모듈 패키지
+* return.py -> kis.py rename
