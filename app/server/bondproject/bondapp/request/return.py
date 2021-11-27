@@ -1,14 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
 
-_url = 'https://www.kisrating.co.kr/ratingsStatistics/statics_spread.do'
+RETURN_URL = 'https://www.kisrating.co.kr/ratingsStatistics/statics_spread.do'
 
 def return_by_rating(search_title):
     key_data = [
         '구분', '3m', '6m', '9m', '1y', '1y6m', '2y', '3y', '5y'
     ]
 
-    soup = _get_soup(_url)
+    soup = _get_soup(RETURN_URL)
     date = get_date()
     tbody = soup.select_one('tbody')
     tables = tbody.select('tr')
@@ -27,7 +27,7 @@ def return_by_rating(search_title):
 
 
 def get_date():
-    soup = _get_soup(_url)
+    soup = _get_soup(RETURN_URL)
     return soup.find('input', {'title':'기간선택'}).get('value')
 
 

@@ -8,7 +8,7 @@ from manipulation import Calc
 import pandas as pd
 
 
-url = 'http://apis.data.go.kr/1160100/service/GetBondIssuInfoService/getBondBasiInfo'
+BOND_API_URL = 'http://apis.data.go.kr/1160100/service/GetBondIssuInfoService/getBondBasiInfo'
 OPEN_API_KEY = 'YGMVpil/AHi/wBtNL1n90yhai6K4kIez7xRbCUDpiYWzd4cuhNahumycXmM/7jWmILuERvt9hTzE1YBo+DnDmg=='
 COLUMN_NAMES = [
         'scrsItmsKcdNm',  # 유가증권종목종류코드명
@@ -48,7 +48,7 @@ def get_json_item(page, _max):
         quote_plus('basDt') : now_date
     })
     
-    response = urlopen(url+queryParams)
+    response = urlopen(BOND_API_URL+queryParams)
     json_api = response.read().decode("utf-8")
     try:
         json_file = json.loads(json_api)
