@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 RETURN_URL = 'https://www.kisrating.co.kr/ratingsStatistics/statics_spread.do'
 
-def return_by_rating(search_title):
+def yld_by_rating(search_title):
     key_data = [
         '구분', '3m', '6m', '9m', '1y', '1y6m', '2y', '3y', '5y'
     ]
@@ -41,6 +41,6 @@ def _get_soup(url):
 
 if __name__=='__main__':
     import pandas as pd
-    df = pd.DataFrame(return_by_rating('국고채'), index=['date'])
+    df = pd.DataFrame(yld_by_rating('국고채'), index=['date'])
     df.set_index(['date'], inplace=True)
     print(df)
