@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class BondYld(models.Model):
-    date = models.CharField(max_length=6, primary_key=True)
+    date = models.CharField(max_length=20)
     bond_type = models.CharField(max_length=4)
     three_month = models.CharField(max_length=4)
     six_month = models.CharField(max_length=4)
@@ -19,9 +19,9 @@ class BondYld(models.Model):
 
 
 class YldDeviation(models.Model):
-    dv_id = models.CharField(max_length=10, primary_key=True)
-    fk_date = models.ForeignKey(BondYld, on_delete=models.CASCADE, db_column='fk_date')
+    bond_yld_id = models.ForeignKey(BondYld, on_delete=models.CASCADE, db_column='bond_yld_id')
     dv_value = models.CharField(max_length=25)
+    int_cycle = models.CharField(max_length=10)
 
     class Meta:
         db_table = 'yld_deviation'

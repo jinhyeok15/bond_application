@@ -4,12 +4,13 @@ from urllib.parse import urlencode, quote_plus
 import json
 from datetime import datetime, timedelta
 
-from manipulation import Calc
+from .manipulation import Calc
+from . import reqconf
 import pandas as pd
 
 
 BOND_API_URL = 'http://apis.data.go.kr/1160100/service/GetBondIssuInfoService/getBondBasiInfo'
-OPEN_API_KEY = 'YGMVpil/AHi/wBtNL1n90yhai6K4kIez7xRbCUDpiYWzd4cuhNahumycXmM/7jWmILuERvt9hTzE1YBo+DnDmg=='
+OPEN_API_KEY = reqconf.OPEN_API_KEY
 COLUMN_NAMES = [
         'scrsItmsKcdNm',  # 유가증권종목종류코드명
         'bondIssuCurCd', # 채권발행통화코드

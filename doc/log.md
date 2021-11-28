@@ -32,5 +32,8 @@
 + return.py -> kis.py rename
 
 ## 11.28
-- Selenium으로 KIS 수익률 테이블 크롤링 후, 데이터베이스에 저장
 + db설계 완료
+
+## 11.29
++ Selenium으로 KIS 수익률 테이블 크롤링 후, 데이터베이스에 저장
+- 문서화 작업하기
