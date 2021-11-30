@@ -9,15 +9,14 @@ KIS bond return data: <https://www.kisrating.co.kr/ratingsStatistics/statics_spr
 When the application built, daily bond return data is stored at database, and calculate volatility that reflects current return data.
 
 ## 기획안
-채권의 유가증권종목종류코드명(국고채, 특수채 등)과 이자지급방식별 분류(이표채, 복리채 등)를 활용하여, 
-모든 채권의 채권 가격을 계산하여 수익율 데이터를 반영하는 것이 나을 듯. 
-채권 API데이터에서 얻은 수익률들을 그래프로 시각화 하고, 가장 최신의 데이터로부터 1개월 뒤의 수익률을 예측할 것.
-예측한 수익률은 1개월 뒤에 실제 수익률과 비교한 편차로 DB에 저장되며, 지속적으로 강화학습을 시켜 모델의 정확도를 높인다.\
-\
-<문제 및 해결방안>   
-채권 데이터 중, 국채 데이터만 끌어오기에는 데이터 양이 너무 부족함. 20000여개의 데이터를 모두 사용해야 효율성을 높일 수 있을 듯.\
-api에 국채 가격에 대한 정보가 없음. 따라서 국채가격을 알려면 해당 날짜의 KIS 수익률 데이터를 가져와야함.
-KIS 수익률 데이터를 2016년부터 1달 간격으로 가져와서 MYSQL db에 저장할 것
+[12.1 변경사항]
+1. 채권의 수익률을 DB로부터 가져와서 그래프로 시각화 (시각화 모듈은 matplotlib, 추후 chart.js활용하기)\
+2. stochastic interest rate model을 보여주고, 해당 interest rate model과 실제 interest model을 비교했을 때 가장 정확도가 높은 
+model을 optimize버튼을 통해 알고리즘에 반영시킬 수 있다. 만일 optimize 버튼이 활성화 되지 않을 경우, next버튼으로 
+다음 가상 model을 보여줌.\
+3. 추후에 로그인을 통한 계정 프로필 생성 기능을 추가할 경우, 가장 적합한 model을 찾은 유저는 DashBoard에 기록된다.\
+   
+[Oven] (https://ovenapp.io/project/o8vtYBpYjX62sAiaNdtnWeLpGQoTB89X#k9II6)
 
 ## Documentation
 <a href="doc/log.md">[Log]</a>   
