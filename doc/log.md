@@ -41,5 +41,8 @@
 
 ## 12.3
 > matplotlib로 시각화하기 (KIS 채권 수익률만)\
-> runserver시 24시간 지나면 자동적으로 오래된 데이터 지우고, 최신 데이터 저장(수익률)\
-- html static 파일 추가 경로 세팅 및 test용 css class 추가
+> runserver시 24시간 지나면 자동적으로 오래된 데이터 지우고, 최신 데이터 저장(수익률)
++ html static 파일 추가 경로 세팅 및 test용 css class 추가
+
+## 12.4
++ home화면 structure 설계

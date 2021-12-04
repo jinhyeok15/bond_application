@@ -1,0 +1,15 @@
+.header-structure {
+    /* border-bottom: solid 1px; */
+    height: 100px;
+}
+
+.home-button {
+    position: absolute;
+    top: 30px;
+    left: 50px;
+}
+
+.home-icon {
+    width: 25px;
+    height: 25px;
+}
