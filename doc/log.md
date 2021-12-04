@@ -46,3 +46,6 @@
 
 ## 12.4
 + home화면 structure 설계
+
+## 12.5
++ home화면 content title 작업

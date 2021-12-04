@@ -3,5 +3,5 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url('home/', views.helloworld, name="hello_world"),
+    url('home/', views.home_template, name="home"),
 ]

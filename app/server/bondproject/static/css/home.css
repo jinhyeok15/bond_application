@@ -4,17 +4,26 @@ a {
 
 .content-structure {
     position: absolute;
-    margin-left: 200px;
-    margin-right: 200px;
+    padding-left: 200px;
+    padding-right: 200px;
+    left: 100px;
 }
 
 .content-title {
     position: absolute;
     width: 500px;
-    left: 200px;
-    /* background-color: aqua; */
+    background-color: yellowgreen;
 }
 
 .content-title-name {
     text-align: center;
 }
+
+.content-filter-scroller {
+    width: 300px;
+    height: 100px;
+    overflow-y: scroll;
+    scrollbar-color: black white;
+    scrollbar-width: thin;
+  }
+  
