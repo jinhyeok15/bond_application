@@ -2,6 +2,12 @@ a {
     color: black; text-decoration: none;
 }
 
+li {
+    list-style: none;
+    padding-left: 0px;
+    margin-top: 7px;
+}
+
 .content-structure {
     position: absolute;
     padding-left: 200px;
@@ -20,26 +26,29 @@ a {
     text-align: center;
 }
 
-.content-filter-scroller {
-    width: 300px;
-    height: 100px;
-    overflow-y: scroll;
-    scrollbar-color: black white;
-    scrollbar-width: thin;
-  }
-
-.content-filter-box {
+#content-filter-box {
     position:relative;
     width: 130px;
     height: 30px;
     background-color: white;
     border: solid 1px;
     border-radius: 5px;
+    z-index: 999;
+    overflow: hidden;
     left: 370px;
     top: 70px;
 }
 
-.content-filter-box-button {
+#content-filter-box.active {
+    width: 147px;
+    height: 150px;
+    border-top: white;
+    border-right: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#content-filter-box-button {
     position: absolute;
     width: 0px;height: 0px;
     right: 5%;
@@ -51,9 +60,9 @@ a {
 }
 
 .content-plot {
-    position:relative;
+    position:absolute;
     width: 500px;
     height: 500px;
-    top: -32.5px;
+    top: 0px;
     border: solid black 1px;
 }
