@@ -6,8 +6,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# secret file
 configs.py
-
-# req
 reqconf.py
+
+# chromedriver for selenium
 chromedriver.exe
