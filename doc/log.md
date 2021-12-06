@@ -51,3 +51,6 @@
 + home화면 content title 작업
 + 필터 박스 추가 및, plot container추가
 + static/js 추가, 필터 구현하기
+
+## 12.6
++ 필터 완성

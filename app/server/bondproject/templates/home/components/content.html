@@ -3,19 +3,31 @@
         <h3 class="content-title-name">KIS bond interest rate by {{ defaultType.국고채 }}</h3>
     </div>
     <div id="content-filter-box">
-        {% for type in types %}
-        <li><b>{{ type }}</b></li>
-        {% endfor %}
+        <div id="content-filter-list">
+            {% for type in types %}
+            <li><b>{{ type }}</b></li>
+            {% endfor %}
+        </div>
         <div id="content-filter-box-button"></div>
     </div>
     <div class="content-plot"></div>
-
-    <script>
-        $(document).ready(function(){
-            $('#content-filter-box-button').on('click', function() {
-            $('#content-filter-box').toggleClass('active');
-            });
-        });
-        
-    </script>
 </div>
+<script>
+    let filterStatus = 0;
+    $(document).ready(function(){
+        $('#content-filter-box-button').on('click', function() {
+            if (filterStatus===0) {
+                $('#content-filter-box').addClass('active');
+                $('#content-filter-list').addClass('active');
+                filterStatus=1;
+            }
+            else {
+                $('#content-filter-box').removeClass('active');
+                $('#content-filter-list').scrollTop(0);
+                $('#content-filter-list').removeClass('active');
+                filterStatus=0;
+            }
+        });
+    });
+    
+</script>
