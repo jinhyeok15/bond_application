@@ -8,7 +8,7 @@ from bondproject.settings import (
 # Create your views here.
 def home_template(request):
     default_type = {"국고채":"KTB"}
-    URL = 'https://'+AWS_S3_CUSTOM_DOMAIN+'/media/sample_img.jpg'
+    URL = 'https://'+AWS_S3_CUSTOM_DOMAIN+f'/media/20211206_국고채.png'
     provide = {
         "defaultType": default_type,
         "types": RATING_TYPE,

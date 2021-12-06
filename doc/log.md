@@ -56,4 +56,5 @@
 > matplotlib 시각화
 + 필터 완성
 + boto3연결 및 sample image template적용, matplotlib로 plot 생성
-
+- matplotlib img s3에 저장, template에서 불러오기
+- index.html생성, home.html과 구분

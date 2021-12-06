@@ -19,7 +19,7 @@ li {
     position: absolute;
     width: 500px;
     height: 70px;
-    background-color: yellowgreen;
+    /* background-color: yellowgreen; */
 }
 
 .content-title-name {
@@ -78,7 +78,7 @@ li {
     width: 500px;
     height: 600px;
     top: 0px;
-    border: solid black 1px;
+    /* border: solid black 1px; */
 }
 
 #overlay {

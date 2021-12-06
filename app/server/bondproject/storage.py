@@ -1,5 +1,7 @@
 import boto3
-from bondproject.settings import AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_S3_REGION_NAME
+from bondproject.settings import (
+    AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_S3_REGION_NAME, AWS_STORAGE_BUCKET_NAME
+)
 
 import os
 # Python이 실행될 때 DJANGO_SETTINGS_MODULE이라는 환경 변수에 현재 프로젝트의 settings.py파일 경로를 등록합니다.
@@ -15,18 +17,18 @@ import datetime
 import math
 
 
+NOW = datetime.datetime.now()
 def makePlot(type):
     data = BondYld.objects.filter(bond_type=type)
-    now = datetime.datetime.now()
     str_first = data[0].date
     first = datetime.datetime.strptime(str_first, '%Y.%m.%d')
-    max_delta = int((now-first).days)
+    max_delta = int((NOW-first).days)
     x = []
     y = []
     for d in data:
         str_dte = d.date
         dte = datetime.datetime.strptime(str_dte, '%Y.%m.%d')
-        delta = int((now-dte).days)
+        delta = int((NOW-dte).days)
         x.append(max_delta-delta)
         y.append(float(d.five_year))
     plt.plot(x, y)
@@ -46,7 +48,9 @@ client = boto3.client('s3',
                       aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
                       region_name=AWS_S3_REGION_NAME
                       )
-response = client.list_buckets() # bucket 목록
 
-plot = makePlot('국고채')
-plot.show()
+# plot = makePlot('국고채')
+str_now = NOW.strftime('%Y%m%d')
+file = f'media/{str_now}_국고채.png'
+# plot.savefig(f'media/{str_now}_국고채.png')
+response = client.upload_file(file, AWS_STORAGE_BUCKET_NAME, file)
