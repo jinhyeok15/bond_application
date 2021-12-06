@@ -53,4 +53,7 @@
 + static/js 추가, 필터 구현하기
 
 ## 12.6
+> matplotlib 시각화
 + 필터 완성
++ boto3연결 및 sample image template적용, matplotlib로 plot 생성
+
