@@ -41,6 +41,7 @@ li {
 #content-filter-box.active {
     /* width: 147px; */
     height: 150px;
+    z-index: 3;
 }
 
 #content-filter-box-button {
