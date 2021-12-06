@@ -6,6 +6,17 @@ from bondproject.settings import (
 )
 
 # Create your views here.
+
+def index_template(request):
+    default_type = {"국고채":"KTB"}
+    URL = 'https://'+AWS_S3_CUSTOM_DOMAIN+f'/media/20211206_국고채.png'
+    provide = {
+        "defaultType": default_type,
+        "types": RATING_TYPE,
+        "source": URL
+    }
+    return render(request, 'index.html', provide)
+
 def home_template(request):
     default_type = {"국고채":"KTB"}
     URL = 'https://'+AWS_S3_CUSTOM_DOMAIN+f'/media/20211206_국고채.png'
