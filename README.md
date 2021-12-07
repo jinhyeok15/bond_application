@@ -8,15 +8,26 @@
 <a href="doc/code.md">[Code description]</a>
 
 ## Service instruction
-### \<First Stage\> 
- The service shows data about 5-maturity-yield 
-which is labeled by credit rates that is evaluated by KIS(Korea Investors Service).\
- The data was crawled up to five years ago based on the current date and stored in the database.\
- To visualize the data, the web server use python matplotlib and stores plot images 
-to AWS S3 storage.
 
-### \<Second Stage\>
+1. 
+The service shows data about 5-maturity-yield 
+which is labeled by credit rates that is evaluated by KIS(Korea Investors Service).
+The data was crawled up to five years ago based on the current date and stored in the database. 
+To visualize the data, the web server use python matplotlib and stores plot images 
+to AWS S3 storage. The data is refreshed every 24 hours, server stores current data and removes oldest data.
 
+2.
+Starting from five years ago, we show the return model derived based on the algorithm as the actual model 
+and obtain numerical data on how much the model deviates from the actual model.
+The user inquires the most optimized model and actual yield graph on the home screen.
+When the Next button is pressed below, the graph is updated, and the graph of the new model and the actual yield graph appear.
+If the model shows a greater similarity to the actual yield data than the existing model, the Next button is deactivated and the Optimize button is activated.
+When the Optimize button is pressed, a new model replaces the existing model.
+The return model reflected on the home screen can be inquired.
+
+3. 
+The service will update feature which is to create profile with login.
+The person who finds optimal model, he/she records on dashboard.
 
 ## 기획안
 [Oven](https://ovenapp.io/project/o8vtYBpYjX62sAiaNdtnWeLpGQoTB89X#k9II6)
