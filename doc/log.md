@@ -1,3 +1,4 @@
+<a href="../README.md">Home</a>
 # Log
 
 ## 11.24
