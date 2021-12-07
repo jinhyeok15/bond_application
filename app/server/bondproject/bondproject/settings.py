@@ -26,7 +26,7 @@ SECRET_KEY = configs.DJANGO_SECRET_KEY['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', configs.AWS_SETTINGS['DEPLOY_IP']]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', configs.AWS_SETTINGS['DEPLOY_IP'], configs.DOMAIN]
 
 
 # Application definition
