@@ -1,40 +1,9 @@
-<div class="content-structure">
-    <div class="content-title">
-        <h3 class="content-title-name">KIS {{ defaultType.국고채 }} bond by 5-year maturity</h3>
-    </div>
-    <div id="content-filter-box">
-        <div id="content-filter-list">
-            {% for type in types %}
-            <li><b>{{ type }}</b></li>
-            {% endfor %}
-        </div>
-        <div id="content-filter-box-button"></div>
-    </div>
-    <div class="content-plot">
-        <img src="{{ source }}" style="
-        position:absolute;
-        width: 400px;
-        height: 300px;
-        left: 50px;
-        top: 120px;">
-    </div>
+{% load static %}
+<div class="content-plot">
+    <img src="{{ source }}" style="
+    position:absolute;
+    width: 400px;
+    height: 300px;
+    left: 50px;
+    top: 120px;">
 </div>
-<script>
-    let filterStatus = 0;
-    $(document).ready(function(){
-        $('#content-filter-box-button').on('click', function() {
-            if (filterStatus===0) {
-                $('#content-filter-box').addClass('active');
-                $('#content-filter-list').addClass('active');
-                filterStatus=1;
-            }
-            else {
-                $('#content-filter-box').removeClass('active');
-                $('#content-filter-list').scrollTop(0);
-                $('#content-filter-list').removeClass('active');
-                filterStatus=0;
-            }
-        });
-    });
-    
-</script>

@@ -38,6 +38,17 @@ li {
     top: 70px;
 }
 
+.selected-type {
+    font-weight: bold;
+    border: 0px;
+    background-color: white;
+    cursor: default;
+}
+
+.selected-type.active {
+    cursor: pointer;
+}
+
 #content-filter-box.active {
     /* width: 147px; */
     height: 150px;

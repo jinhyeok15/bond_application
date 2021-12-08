@@ -62,6 +62,9 @@
 
 ## 12.7
 + 홈 화면, 그래프 제목 변경
-- matplotlib {rate}마다 image저장
-- 필터 버튼 클릭시, plot 반영
-  - 필터 버튼 스크롤 부분 박스 테두리 안 가리게 하기
+
+## 12.8
++ matplotlib {rate}마다 image저장
+  + s3에 {rate}마다 image 저장 완료
++ 필터 버튼 클릭시, plot 반영
+  + 필터 선택시 목록 버튼화하기

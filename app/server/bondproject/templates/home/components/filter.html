@@ -1,0 +1,13 @@
+<div id="content-filter-box">
+    <div id="content-filter-list">
+        {% for type in types %}
+        <div id="{{ type }}">
+            <form action="" method="POST" id="filter">
+                {% csrf_token %}
+                <li><input type="submit" name="type" value="{{ type }}" class="selected-type"></li>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    <div id="content-filter-box-button"></div>
+</div>

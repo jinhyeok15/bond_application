@@ -1,5 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
+{% load static %}
+{% block title %}Korea Bond Yield{% endblock %}
 {% block content %}
-{% include "home/components/content.html" %}
+<div class="content-structure">
+    {% include "home/components/title.html" %}
+    {% include "home/components/filter.html" %}
+    {% include "home/components/content.html" %}
+</div>
+<script src="{% static 'js/home.js' %}"></script>
 {% endblock %}
