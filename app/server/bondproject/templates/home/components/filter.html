@@ -5,6 +5,7 @@
             <form action="" method="POST" id="filter">
                 {% csrf_token %}
                 <li><input type="submit" name="type" value="{{ type }}" class="selected-type"></li>
+                <input type="hidden" name="tab" value="{{ tab }}">
             </form>
         </div>
         {% endfor %}

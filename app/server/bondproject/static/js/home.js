@@ -1,7 +1,10 @@
 let filterStatus = 0;
+
 const RATING_TYPE = [
     '국고채', 'AAA', 'AA+', 'AA', 'AA-', 'A+', 'A', 'A-', 'BBB+', 'BBB', 'BBB-'
 ]
+
+
 $(document).ready(function(){
     $('#content-filter-box-button').on('click', function() {
         if (filterStatus===0) {

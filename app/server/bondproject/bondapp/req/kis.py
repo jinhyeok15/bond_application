@@ -6,6 +6,17 @@ RATING_TYPE = [
     '국고채', 'AAA', 'AA+', 'AA', 'AA-', 'A+', 'A', 'A-', 'BBB+', 'BBB', 'BBB-'
 ]
 
+
+def all_type_set():
+    subset = [[]]
+    for r in RATING_TYPE:
+        size = len(subset)
+        for y in range(size):
+            subset.append(subset[y]+[r])
+    subset.remove([])
+    return subset
+
+
 def yld_by_rating(soup, search_title):
     key_data = [
         '구분', '3m', '6m', '9m', '1y', '1y6m', '2y', '3y', '5y'

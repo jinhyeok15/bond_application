@@ -5,16 +5,20 @@ a {
 li {
     list-style: none;
     padding-left: 0px;
-    margin-top: 7px;
+    margin-top: 4px;
 }
 
 .content-structure {
     position: absolute;
-    padding-left: 200px;
-    padding-right: 200px;
-    left: 100px;
+    width: 600px;
+    height: 600px;
+    padding-left: 100px;
+    padding-right: 100px;
+    left: 200px;
+    border: solid black 1px;
 }
 
+/* title */
 .content-title {
     position: absolute;
     width: 500px;
@@ -26,16 +30,53 @@ li {
     text-align: center;
 }
 
+/* filter */
 #content-filter-box {
     position:relative;
-    width: 130px;
+    width: 100px;
     height: 30px;
     background-color: white;
     border: solid 1px;
     border-radius: 5px;
     /* overflow: hidden; */
-    left: 370px;
-    top: 70px;
+    left: 60px;
+    top: 60px;
+}
+
+#content-filter-box.active {
+    /* width: 147px; */
+    height: 150px;
+    z-index: 33;
+}
+
+#content-filter-box-button {
+    position: absolute;
+    width: 0px;height: 0px;
+    right: 5%;
+    top: 12.5px;
+    border-top:5px solid black;
+    border-bottom:5px solid none;
+    border-right: 5px solid transparent;
+    border-left: 5px solid  transparent;
+    z-index: 35;
+    cursor: pointer;
+}
+
+#content-filter-list {
+    position:absolute;
+    width: 70px;
+    height: 25px;
+    background-color: white;
+    overflow: hidden;
+    top: 1px;
+}
+
+#content-filter-list.active {
+    width: 117px;
+    height: 147px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    z-index: 32;
 }
 
 .selected-type {
@@ -49,48 +90,86 @@ li {
     cursor: pointer;
 }
 
-#content-filter-box.active {
-    /* width: 147px; */
-    height: 150px;
-    z-index: 3;
+/* plot */
+.content-plot {
+    position:absolute;
+    width: 400px;
+    height: 350px;
+    top: 130px;
+    left: 160px;
+    border: solid black 1px;
 }
 
-#content-filter-box-button {
+.tab-box {
+    position: relative;
+    width: 150px;
+    height: 30px;
+    top: -30px;
+    /* background-color: aquamarine; */
+}
+
+#tab-box-left {
+    position: relative;
+    top: 0px;
+    width: 65px;
+    height: 30px;
+    border: solid 1px;
+    border-radius: 5px 5px 0px 0px;
+    border-bottom: 0px;
+    float: left;
+}
+
+#tab-box-left.active {
+    top: 10px;
+    height: 20px;
+}
+
+#tab-box-right {
+    position:relative;
+    top: 10px;
+    width: 65px;
+    height: 20px;
+    border: solid 1px;
+    border-radius: 5px 5px 0px 0px;
+    border-bottom: 0px;
+    float: left;
+}
+
+#tab-box-right.active {
+    top: 0px;
+    height: 30px;
+}
+
+div form button {
     position: absolute;
-    width: 0px;height: 0px;
-    right: 5%;
-    top: 12.5px;
-    border-top:5px solid black;
-    border-bottom:5px solid none;
-    border-right: 5px solid transparent;
-    border-left: 5px solid  transparent;
-    z-index: 5;
+    background-color: white;
+    border: 0px;
+    width: 60px;
+    height: 100%;
+    margin-left: 2.5px;
     cursor: pointer;
 }
 
-#content-filter-list {
+/* figure */
+
+.content-figure {
     position:absolute;
-    width: 100px;
-    height: 25px;
     background-color: white;
-    overflow: hidden;
-    top: 1px;
-}
-
-#content-filter-list.active {
-    width: 147px;
-    height: 147px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    z-index: 2;
-}
-
-.content-plot {
-    position:absolute;
-    width: 500px;
-    height: 600px;
+    width: 400px;
+    height: 300px;
     top: 0px;
-    /* border: solid black 1px; */
+}
+
+.figure-box {
+    position: relative;
+    top: 40px;
+    left: 20px;
+    width: 200px;
+    height: 70px;
+}
+
+.figure-box li {
+    font-size: 10px;
 }
 
 #overlay {

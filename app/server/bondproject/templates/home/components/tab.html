@@ -1,0 +1,22 @@
+<div class="tab-box">
+    {% if tab == "0" %}
+    <div id="tab-box-left">
+    {% else %}
+    <div id="tab-box-left" class="active">
+    {% endif %}
+        <form action="" method="POST" id="tab0">{% csrf_token %}
+            <input type="hidden" name="type" value="{{ selected_type }}">
+            <button type="submit" name="tab" value="0">Graph</button>
+        </form>
+    </div>
+    {% if tab == "0" %}
+    <div id="tab-box-right">
+    {% else %}
+    <div id="tab-box-right" class="active">
+    {% endif %}
+        <form action="" method="POST" id="tab1">{% csrf_token %}
+            <input type="hidden" name="type" value="{{ selected_type }}">
+            <button type="submit" name="tab" value="1">Figure</button>
+        </form>
+    </div>
+</div>

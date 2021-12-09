@@ -1,9 +1,22 @@
 {% load static %}
 <div class="content-plot">
+    {% include "home/components/tab.html" %}
+    {% if tab == "0" %}
     <img src="{{ source }}" style="
     position:absolute;
     width: 400px;
     height: 300px;
-    left: 50px;
-    top: 120px;">
+    left: 0px;
+    top: 0px;">
+    {% else %}
+    <div class="content-figure">
+        {% for fg in figure %}
+        <div class="figure-box">
+            <b>[term{{ fg.term }}]</b>
+            <li>volatility: {{ fg.vol }}</li>
+            <li>differentiation: {{ fg.diff }}</li><br>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 </div>
