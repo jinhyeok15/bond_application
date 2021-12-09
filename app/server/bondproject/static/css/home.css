@@ -15,7 +15,7 @@ li {
     padding-left: 100px;
     padding-right: 100px;
     left: 200px;
-    border: solid black 1px;
+    /* border: solid black 1px; */
 }
 
 /* title */
