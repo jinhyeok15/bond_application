@@ -2,4 +2,4 @@
 # Description
 
 ## Architecture
-<img src="src/ServerArchitecture.JPG" style="width:400px; height:300px">
+<img src="src/ServerArchitecture.JPG" style="width:600px; height:400px">

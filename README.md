@@ -5,8 +5,8 @@
 
 ## Documentation
 <a href="doc/log.md">[Log]</a>   
-<a href="doc/code.md">[Code]</a>
-<a href="doc/description.md">[Code]</a>
+<a href="doc/code.md">[Code]</a>   
+<a href="doc/description.md">[Description]</a>
 
 ## Service instruction
 
