@@ -20,7 +20,7 @@ So I calculates the figures of each term.
 > The reference about the volatility is [here](https://www.investopedia.com/terms/v/volatility.asp).
 4. average of differentiation
 > The differentiation is 
-$ \frac {\delta y} {\delta t} $.
+δy/δt.
 > The average of differentiation is useful when the trend of graph is unidirectional
 
 First I checked South Korea treasury bond yield data
