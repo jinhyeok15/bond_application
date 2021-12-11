@@ -1,3 +1,4 @@
+html header: <script type="text/javascript"  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <a href="../README.md">Home</a>
 # Description
 
@@ -20,10 +21,8 @@ So I calculates the figures of each term.
 > The reference about the volatility is [here](https://www.investopedia.com/terms/v/volatility.asp).
 4. average of differentiation
 > The differentiation is 
-
+\\(\delta y \div \delta t $$).
 > The average of differentiation is useful when the trend of graph is unidirectional
-
-$$ \delta y \div \delta t $$.
 
 First I checked South Korea treasury bond yield data
 Term3 and term4 are group of lager amount of volatility.
