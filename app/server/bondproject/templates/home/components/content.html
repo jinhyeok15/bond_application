@@ -13,8 +13,10 @@
         {% for fg in figure %}
         <div class="figure-box">
             <b>[term{{ fg.term }}]</b>
+            <li>avgyld: {{ fg.avgyld }}</li>
+            <li>stdyld: {{ fg.stdyld }}</li>
             <li>volatility: {{ fg.vol }}</li>
-            <li>differentiation: {{ fg.diff }}</li><br>
+            <li>diff: {{ fg.diff }}</li><br>
         </div>
         {% endfor %}
     </div>

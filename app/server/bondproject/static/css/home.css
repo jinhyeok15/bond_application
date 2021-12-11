@@ -94,7 +94,7 @@ li {
 .content-plot {
     position:absolute;
     width: 400px;
-    height: 350px;
+    height: 400px;
     top: 130px;
     left: 160px;
     border: solid black 1px;
@@ -162,10 +162,12 @@ div form button {
 
 .figure-box {
     position: relative;
-    top: 40px;
+    top: 20px;
     left: 20px;
     width: 200px;
-    height: 70px;
+    height: 80px;
+    margin-bottom: 10px;
+    /* background-color: aquamarine; */
 }
 
 .figure-box li {

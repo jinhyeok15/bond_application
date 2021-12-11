@@ -19,8 +19,8 @@ def home_template(request):
     if request.method == "GET":
         provide = {
             "types": RATING_TYPE,
-            "source": S3_DEFAULT_URL,
             "selected_type": DEFAULT_TYPE,
+            "source": S3_DEFAULT_URL,
             "tab": '0',
         }
         return render(request, template, provide)
@@ -49,14 +49,16 @@ def home_template(request):
                 obj_by_term.append(obj[t])
             figs.append({
                 "term": str(i+1),
+                "avgyld": str(snd_avg_yld(obj_by_term)),
+                "stdyld": str(snd_std_yld(obj_by_term)),
                 "vol": str(snd_vol(obj_by_term)),
                 "diff": str(snd_avg_dff(obj_by_term)),
             })
         
         provide = {
             "types": ordered_type,
-            "source": s3_url,
             "selected_type": rate_type,
+            "source": s3_url,
             'tab': tab_type,
             'figure': figs,
         }

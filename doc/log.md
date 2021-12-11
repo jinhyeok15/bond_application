@@ -72,4 +72,8 @@
 ## 12.9
 + x축 데이터 베이스 처음, 끝 날짜 불러와서 조정하기
 + 수치 데이터 조회 기능 추가하기
-- 그래프 비교 기능 추가하기
+
+## 12.10
+- stdiv(differentiation) 추가
+- templates form부분 refactoring
+- view provide 부분 고치기

@@ -20,7 +20,7 @@ def snd_vol(obj):
     i=1
     dy_arr = []
     while(i<n):
-        dy = np.log(float(yield_list[i])/float(yield_list[i-1]))
+        dy = np.log(yield_list[i]/yield_list[i-1])
         dy_arr.append(dy)
         i += 1
     avg_dy = sum(dy_arr)/n
@@ -33,14 +33,45 @@ def snd_avg_dff(obj):
     i=1
     dy_arr = []
     while(i<len(yield_list)):
-        dy = np.log(float(yield_list[i])/float(yield_list[i-1]))
+        dy = np.log(yield_list[i]/yield_list[i-1])
         dy_arr.append(dy)
         i += 1
     return sum(dy_arr)/len(dy_arr)
 
 
+def snd_avg_yld(obj):
+    yield_list = obj_to_yield(obj)
+    return sum(yield_list)/len(yield_list)
+
+
+def snd_std_yld(obj):
+    yield_list = obj_to_yield(obj)
+    return stdiv(yield_list)
+
+
+def snd_avg_std_dff(obj):
+    yield_list = obj_to_yield(obj)
+    i=1
+    dy_arr = []
+    while(i<len(yield_list)):
+        dy = np.log(yield_list[i]/yield_list[i-1])
+        dy_arr.append(dy)
+        i += 1
+    return stdiv(dy_arr)
+
+
+def stdiv(l_data):
+    sum_data = sum(l_data)
+    n = len(l_data)
+    avg_dt = sum_data/n
+    sum_dev = 0
+    for d in l_data:
+        sum_dev += (d-avg_dt)**2
+    return sum_dev/n
+
+
 def obj_to_yield(obj):
     li = []
     for o in obj:
-        li.append(o.five_year)
+        li.append(float(o.five_year))
     return li

@@ -18,7 +18,7 @@ mat.rcParams["font.family"] = 'batang'
 
 import datetime
 import os
-from bondapp.req.kis import all_type_set
+# from bondapp.req.kis import all_type_set
 
 
 NOW = datetime.datetime.now()
@@ -26,8 +26,7 @@ STR_NOW = NOW.strftime('%Y%m%d')
 STR_YST = (NOW-datetime.timedelta(days=1)).strftime('%Y%m%d')
 
 
-def makePlot(type):
-    print(type)
+def actPlot(type):
     data = BondYld.objects.filter(bond_type=type)
     str_date = data[0].date
     first = datetime.datetime.strptime(str_date, '%Y.%m.%d')
@@ -54,14 +53,6 @@ def makePlot(type):
     return plt
 
 
-def plotFactory(type_list):
-    plt.clf()  # plt 초기화
-    for t in type_list:
-        makePlot(t)
-    plt.legend()
-    return plt
-
-
 S3_CLIENT = boto3.client('s3',
                       aws_access_key_id=AWS_ACCESS_KEY_ID,
                       aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
@@ -69,9 +60,11 @@ S3_CLIENT = boto3.client('s3',
                       )
 
 
-def update_plt(rate_subset):  # rate_subset에 type의 list를 조회
-    for i, rates in enumerate(rate_subset):
-        plot = plotFactory(rates)
+def update_plt(rate_arr):  # rate_arr
+    for i, rate in enumerate(rate_arr):
+        plt.clf()  # plt 초기화
+        plot = actPlot(rate)
+        plot = actPlot('국고채')  # 모델링한 plot으로 refactoring modelPlot(i)
 
         file_name = f'{STR_NOW}_{i}'
         file_path = f'media/{file_name}.png'
@@ -81,9 +74,9 @@ def update_plt(rate_subset):  # rate_subset에 type의 list를 조회
             os.remove(file_path)
 
 # 주의***: 추후에 db의 가장 마지막 칼럼의 날짜의 파일을 삭제하도록 변경할 것
-def delete_plt(rate_subset):
-    for i in range(len(rate_subset)):
-        file_name = f'{STR_YST}_{i}'
+def delete_plt(rate_arr):
+    for i in range(len(rate_arr)):
+        file_name = f'{STR_YST}_{i}' # STR_YST로 변경할 것 [12.10]
         file_path = f'media/{file_name}.png'
         response = S3_CLIENT.delete_object(Bucket=AWS_STORAGE_BUCKET_NAME, Key=file_path)
 
@@ -91,6 +84,3 @@ def delete_plt(rate_subset):
 # delete_plt(subset)
 # update_plt(subset)
 # plotFactory(['국고채', 'AA+', 'AA', 'BBB+', 'BBB-', 'BBB']).show()
-
-obj = BondYld.objects.filter(bond_type='국고채')
-print(obj)
