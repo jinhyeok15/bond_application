@@ -1,4 +1,3 @@
-html header: <script type="text/javascript"  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <a href="../README.md">Home</a>
 # Description
 
@@ -42,3 +41,5 @@ In the case of the government bond market, unlike the stock market, it is a mark
 Market participants are relatively limited compared to the stock market, 
 and investment patterns are also less efficient than the stock market due to their high tendency to hold them until maturity.
 This is the cause of the unilateral volatility spillover effect from the stock market to the bond market.
+<script type="text/javascript"  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
