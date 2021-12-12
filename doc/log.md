@@ -74,6 +74,10 @@
 + 수치 데이터 조회 기능 추가하기
 
 ## 12.10
-- stdiv(differentiation) 추가
++ stdiv(yield) 추가
++ view provide 부분 고치기
+
+## 12.12
 - templates form부분 refactoring
-- view provide 부분 고치기
+- Figure 시각화 하기
++ KOSPI데이터 가져오는 모듈 설치 및 예제 test

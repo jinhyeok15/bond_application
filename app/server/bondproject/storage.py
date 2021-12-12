@@ -18,7 +18,8 @@ mat.rcParams["font.family"] = 'batang'
 
 import datetime
 import os
-# from bondapp.req.kis import all_type_set
+from bondapp.req.kis import all_type_set, RATING_TYPE
+from pykrx import stock
 
 
 NOW = datetime.datetime.now()
@@ -60,10 +61,10 @@ S3_CLIENT = boto3.client('s3',
                       )
 
 
-def update_plt(rate_arr):  # rate_arr
-    for i, rate in enumerate(rate_arr):
+def update_plt(type_arr):  # type_arr
+    for i, typ in enumerate(type_arr):
         plt.clf()  # plt 초기화
-        plot = actPlot(rate)
+        plot = actPlot(typ)
         plot = actPlot('국고채')  # 모델링한 plot으로 refactoring modelPlot(i)
 
         file_name = f'{STR_NOW}_{i}'
@@ -74,13 +75,15 @@ def update_plt(rate_arr):  # rate_arr
             os.remove(file_path)
 
 # 주의***: 추후에 db의 가장 마지막 칼럼의 날짜의 파일을 삭제하도록 변경할 것
-def delete_plt(rate_arr):
-    for i in range(len(rate_arr)):
+def delete_plt(type_arr):
+    for i in range(len(type_arr)):
         file_name = f'{STR_YST}_{i}' # STR_YST로 변경할 것 [12.10]
         file_path = f'media/{file_name}.png'
         response = S3_CLIENT.delete_object(Bucket=AWS_STORAGE_BUCKET_NAME, Key=file_path)
 
-# subset = all_type_set()
-# delete_plt(subset)
-# update_plt(subset)
-# plotFactory(['국고채', 'AA+', 'AA', 'BBB+', 'BBB-', 'BBB']).show()
+# delete_plt(RATING_TYPE)
+# update_plt(RATING_TYPE)
+df = stock.get_index_ohlcv_by_date("20161129", "20211126", "1001")
+# df['수익률'] = df['종가'] / df['종가'][0]
+df = df['2021']
+print(df.tail())
