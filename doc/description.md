@@ -4,7 +4,7 @@
 ## Architecture
 <img src="src/ServerArchitecture.JPG" style="width:600px; height:400px">
 
-## Results
+## Can volatility affect the interest rate of bond?
 The graph can divide 4 terms and each term's trend is same.
 I try to find the volatility of each term can affect the yield.
 It means that volatility goes up, the risk of market increasing and yield goes up.
@@ -19,7 +19,8 @@ So I calculates the figures of each term.
 > I select historical volatility.
 > The reference about the volatility is [here](https://www.investopedia.com/terms/v/volatility.asp).
 4. average of differentiation
-> The differentiation is $\delta y \div \delta t$.
+> The differentiation is 
+δy/δt.
 > The average of differentiation is useful when the trend of graph is unidirectional
 
 First I checked South Korea treasury bond yield data
