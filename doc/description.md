@@ -7,7 +7,8 @@
 ## 2. Can volatility affect the interest rate of bond?
 ### 2-1. Process
 The graph can divide 4 terms and each term's trend is same.
-<img src="src/bond_return.JPG" style="width:600px; height:400px">
+
+<img src="src/bond_return.JPG" style="width:400px; height:400px">
 
 I try to find the volatility of each term can affect the yield.
 It means that volatility goes up, the risk of market increasing and yield goes up.
