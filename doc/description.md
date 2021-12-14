@@ -8,6 +8,7 @@
 ### 2-1. Process
 The graph can divide 4 terms and each term's trend is same.
 <img src="src/bond_return.JPG" style="width:600px; height:400px">
+
 I try to find the volatility of each term can affect the yield.
 It means that volatility goes up, the risk of market increasing and yield goes up.
 So I calculates the figures of each term.
@@ -26,7 +27,7 @@ So I calculates the figures of each term.
 > The average of differentiation is useful when the trend of graph is unidirectional
 
 ### Result
-<img src="src/figure.JPG" style="width:600px; height:400px">
+<img src="src/figure.JPG" style="width:400px; height:400px">
 
 First I checked South Korea treasury bond yield data
 Term3 and term4 are group of lager amount of volatility.
