@@ -152,28 +152,6 @@ div form button {
 
 /* figure */
 
-.content-figure {
-    position:absolute;
-    background-color: white;
-    width: 400px;
-    height: 300px;
-    top: 0px;
-}
-
-.figure-box {
-    position: relative;
-    top: 20px;
-    left: 20px;
-    width: 200px;
-    height: 80px;
-    margin-bottom: 10px;
-    /* background-color: aquamarine; */
-}
-
-.figure-box li {
-    font-size: 10px;
-}
-
 #overlay {
     position: fixed;
     width: 100%;

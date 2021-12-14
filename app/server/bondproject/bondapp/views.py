@@ -6,14 +6,17 @@ from bondproject.settings import (
 )
 from .fin.figure import *
 import re
+import datetime
 
 # Create your views here.
+S3_PATH = 'https://'+AWS_S3_CUSTOM_DOMAIN+f'/media/'
+NOW_DATE = '20211214'
 
 
 def home_template(request):
     template = 'home/home.html'
     DEFAULT_TYPE = "국고채"
-    S3_DEFAULT_URL = 'https://'+AWS_S3_CUSTOM_DOMAIN+f'/media/20211208_{DEFAULT_TYPE}.png'
+    S3_DEFAULT_URL = 'https://'+AWS_S3_CUSTOM_DOMAIN+f'/media/20211214_0.png'
     TERM_UNIT = 4
     
     if request.method == "GET":
@@ -28,9 +31,8 @@ def home_template(request):
     if request.method == "POST":
         # rate
         rate_type = request.POST['type']
-        sub_type = re.sub('[+]', 'p', rate_type)
-        sub_type = re.sub('[-]', 'm', sub_type)
-        s3_url = 'https://'+AWS_S3_CUSTOM_DOMAIN+f'/media/20211208_{sub_type}.png'
+        rate_idx = RATING_TYPE.index(rate_type)
+        rate_s3_path = S3_PATH + NOW_DATE +f'_{rate_idx}.png'
 
         ordered_type = list(map(lambda x: x, RATING_TYPE))
         ordered_type.remove(rate_type)
@@ -40,27 +42,14 @@ def home_template(request):
         tab_type = request.POST['tab']
 
         # figure
-        obj = BondYld.objects.filter(bond_type=rate_type)
-        terms = div_term(obj, term_num=TERM_UNIT)
-        figs = []
-        for i, tr in enumerate(terms):
-            obj_by_term = []
-            for t in tr:
-                obj_by_term.append(obj[t])
-            figs.append({
-                "term": str(i+1),
-                "avgyld": str(snd_avg_yld(obj_by_term)),
-                "stdyld": str(snd_std_yld(obj_by_term)),
-                "vol": str(snd_vol(obj_by_term)),
-                "diff": str(snd_avg_dff(obj_by_term)),
-            })
+        figure_s3_path = S3_PATH + NOW_DATE +f'_figure{rate_idx}.png'
         
         provide = {
             "types": ordered_type,
             "selected_type": rate_type,
-            "source": s3_url,
+            "source": rate_s3_path,
             'tab': tab_type,
-            'figure': figs,
+            'figure_source': figure_s3_path,
         }
         return render(request, template, provide)
 

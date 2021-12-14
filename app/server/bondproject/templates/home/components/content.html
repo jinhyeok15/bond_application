@@ -9,16 +9,11 @@
     left: 0px;
     top: 0px;">
     {% else %}
-    <div class="content-figure">
-        {% for fg in figure %}
-        <div class="figure-box">
-            <b>[term{{ fg.term }}]</b>
-            <li>avgyld: {{ fg.avgyld }}</li>
-            <li>stdyld: {{ fg.stdyld }}</li>
-            <li>volatility: {{ fg.vol }}</li>
-            <li>diff: {{ fg.diff }}</li><br>
-        </div>
-        {% endfor %}
-    </div>
+    <img src="{{ figure_source }}" style="
+    position:absolute;
+    width: 400px;
+    height: 300px;
+    left: 0px;
+    top: 0px;">
     {% endif %}
 </div>

@@ -18,7 +18,9 @@ mat.rcParams["font.family"] = 'batang'
 
 import datetime
 import os
+import re
 from bondapp.req.kis import all_type_set, RATING_TYPE
+from bondapp.fin.figure import *
 from pykrx import stock
 
 
@@ -61,29 +63,53 @@ S3_CLIENT = boto3.client('s3',
                       )
 
 
-def update_plt(type_arr):  # type_arr
-    for i, typ in enumerate(type_arr):
-        plt.clf()  # plt 초기화
-        plot = actPlot(typ)
-        plot = actPlot('국고채')  # 모델링한 plot으로 refactoring modelPlot(i)
-
-        file_name = f'{STR_NOW}_{i}'
-        file_path = f'media/{file_name}.png'
-        plot.savefig(file_path)
-        response= S3_CLIENT.upload_file(file_path, AWS_STORAGE_BUCKET_NAME, file_path)
-        if os.path.exists(file_path):
-            os.remove(file_path)
+def update_plt(idx_, category=""):
+    file_name = f'{STR_NOW}_{category}{idx_}'
+    file_path = f'media/{file_name}.png'
+    plt.savefig(file_path)
+    response= S3_CLIENT.upload_file(file_path, AWS_STORAGE_BUCKET_NAME, file_path)
+    if os.path.exists(file_path):
+        os.remove(file_path)
+    print(f"updated: {file_name}")
 
 # 주의***: 추후에 db의 가장 마지막 칼럼의 날짜의 파일을 삭제하도록 변경할 것
-def delete_plt(type_arr):
-    for i in range(len(type_arr)):
-        file_name = f'{STR_YST}_{i}' # STR_YST로 변경할 것 [12.10]
-        file_path = f'media/{file_name}.png'
-        response = S3_CLIENT.delete_object(Bucket=AWS_STORAGE_BUCKET_NAME, Key=file_path)
+def delete_plt(idx_, date_, category=""):
+    file_name = f'{date_}_{category}{idx_}' # STR_YST로 변경할 것 [12.10]
+    file_path = f'media/{file_name}.png'
+    response = S3_CLIENT.delete_object(Bucket=AWS_STORAGE_BUCKET_NAME, Key=file_path)
 
-# delete_plt(RATING_TYPE)
-# update_plt(RATING_TYPE)
-df = stock.get_index_ohlcv_by_date("20161129", "20211126", "1001")
+
+def make_figure_plt(type_name, *funcs, term_num=4):
+    plt.clf() # plt 초기화
+    obj = BondYld.objects.filter(bond_type=type_name)
+    terms = div_term(obj, term_num=term_num)
+    x = [f"term{i+1}" for i in range(term_num)]
+    for fi, func in enumerate(funcs):
+        y = []
+        label = func.__name__
+        label = re.sub('snd_', '', label)
+        for i, tr in enumerate(terms):
+            obj_by_term = []
+            for t in tr:
+                obj_by_term.append(obj[t])
+            value = round(func(obj_by_term), 5)
+            y.append(value)
+        plt.plot(x, y, label=label)
+        for i, v in enumerate(x):
+            plt.text(v, y[i], y[i], 
+            rotation=fi%2*10, weight='bold')
+    plt.legend()
+    return plt
+
+# df = stock.get_index_ohlcv_by_date("20161129", "20211126", "1001")
 # df['수익률'] = df['종가'] / df['종가'][0]
-df = df['2021']
-print(df.tail())
+# df = df['2021']
+# print(df.tail())
+
+delete_date = '20211208'
+for i, value in enumerate(RATING_TYPE):
+    plt.clf() # plt 초기화
+    # make_figure_plt(value, snd_avg_dff, snd_std_yld, snd_vol, snd_avg_yld)
+    actPlot(value)
+    update_plt(i)
+    # delete_plt(i, delete_date)

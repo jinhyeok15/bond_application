@@ -78,6 +78,9 @@
 + view provide 부분 고치기
 
 ## 12.12
-- templates form부분 refactoring
-- Figure 시각화 하기
 + KOSPI데이터 가져오는 모듈 설치 및 예제 test
+
+## 12.14
++ Figure 시각화 하기
++ 그래프 새로 setting하기
+> figure그래프에서 text부분 겹칠 때, value를 따로 붙이기
