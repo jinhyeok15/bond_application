@@ -5,46 +5,102 @@
 <img src="src/ServerArchitecture.JPG" style="width:600px; height:400px">
 
 ## 2. Can volatility affect the interest rate of bond?
+
 ### 2-1. Process
-The graph can divide 4 terms and each term's trend is same.
+In application, graphs can divide four different periods of the same trend.
 
 <img src="src/bond_return.JPG" style="width:400px; height:400px">
 
-I try to find the volatility of each term can affect the yield.
-It means that volatility goes up, the risk of market increasing and yield goes up.
-So I calculates the figures of each term.
+In general, volatility in stocks is converted into a risk premium and reflected in the return on stocks. 
+In other words, as volatility increases, the risk premium also increases, which affects the direction in which the return on stocks rises.
+Whether this same concept applies to the bond market is confirmed through the relationship between the volatility of the five-year bond yield and the bond yield.
+The following figures were used to find the relationship.
 
 1. average of yield
 > The average of yield data. 
 > It can be more useful if standard deviation of yield is smaller.  
 2. standard deviation of yield
-
+> The standard deviation is a number that shows how far it deviates from the mean. 
+> It is an indicator of the risk of bond yields.
 3. volatility
-> I select historical volatility.
+> historical volatility.
 > The reference about the volatility is [here](https://www.investopedia.com/terms/v/volatility.asp).
 4. average of differentiation
 > The differentiation is 
 δy/δt.
 > The average of differentiation is useful when the trend of graph is unidirectional
 
-### Result
+### 2-2. Result
 <img src="src/figure.JPG" style="width:400px; height:400px">
 
-First I checked South Korea treasury bond yield data
 Term3 and term4 are group of lager amount of volatility.
-In this case, if my hypothesis is correct, the standard deviation of the rate of return for both terms should be large, 
+In this case, the standard deviation of the rate of return for both terms should be large, 
 and the average differentiation should be positive.
-But I found an outlier in term3. In term3, the standard deviation of the rate of return was the smallest, 
+In term3, the standard deviation of the rate of return was the smallest, 
 and the average differentiation showed a negative value.
 These figures were the same from AAA to BBB-.
-On the conclusion, it has been found that volatility does not always increase returns in the bond market.
+On the conclusion, it has been found that volatility does not always increase return on the bond market.
 
 In the thesis of The Asymmetric Spillovers in Return and Volatility between Korean Stock and Bond Market, Choi, Wan-Soo(2020),
 The volatility of the stock market is reflected in the stock market return as a risk premium, but in the case of the bond market,
-its own volatility is not reflected in the bond market return.
-In addition, according to the volatility spillover effect, 
-the volatility of the stock market is reflected in the yield on the bond market, but the reverse is not established.
+its own volatility is not reflected in the bond market return. 
+
 In the case of the government bond market, unlike the stock market, it is a market centered on institutional investors.
 Market participants are relatively limited compared to the stock market, 
 and investment patterns are also less efficient than the stock market due to their high tendency to hold them until maturity.
 This is the cause of the unilateral volatility spillover effect from the stock market to the bond market.
+
+### 2-3. In-depth research
+
+<details><summary style="font-size: 14px;font-weight:bold;">The code of correlation figure</summary>
+
+```python
+# /storage.py
+
+df = stock.get_index_ohlcv_by_date("20161129", "20211126", "1001")
+bond_obj = _get_obj('국고채')
+terms = div_term(len(df), term_num=30)
+
+stk_avg_diff = []
+stk_volatility = []
+bnd_avg_diff = []
+bnd_volatility = []
+for i, tr in enumerate(terms):
+    obj_by_term = []
+    for t in tr:
+        obj_by_term.append(bond_obj[t])
+    bnd_avg_diff.append(round(snd_avg_dff(obj_by_term), 5))
+    bnd_volatility.append(round(snd_vol(obj_by_term), 5))
+
+    obj = df.copy().iloc[tr]
+    obj['수익률'] = obj['종가'] / obj.iloc[0]['종가']
+    yield_list = []
+    for o in obj['수익률']:
+        yield_list.append(o)
+    idx=1
+    dy_arr = []
+    while(idx<len(yield_list)):
+        dy = np.log(yield_list[idx]/yield_list[idx-1])
+        dy_arr.append(dy)
+        idx += 1
+    value =  sum(dy_arr)/len(dy_arr)
+    stk_avg_diff.append(round(value, 5))
+
+    avg_dy = sum(dy_arr)/len(yield_list)
+    dvy_arr = list(map(lambda x: (avg_dy-x)**2, dy_arr))
+    value = math.sqrt((sum(dvy_arr)/len(dvy_arr))*252)
+    stk_volatility.append(round(value, 5))
+
+df = pd.DataFrame([stk_volatility, stk_avg_diff]).transpose()
+df.columns = ['volatility', 'avg_diff']
+print('The correlation of KOSPI volatility and average differentiation')
+print(df.corr())
+print('-----------------------------')
+
+print('The correlation of South Korea Treasury bond volatility and average differentiation')
+df = pd.DataFrame([bnd_volatility, bnd_avg_diff]).transpose()
+df.columns = ['volatility', 'avg_diff']
+print(df.corr())
+print('-----------------------------')
+```
+</details>

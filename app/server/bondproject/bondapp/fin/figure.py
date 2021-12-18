@@ -1,9 +1,11 @@
 import numpy as np
 import math
 
-def div_term(obj, term_num=4):
-    li_yield = obj_to_yield(obj)
-    max_num = len(li_yield)
+MATURITY = 'five_year'
+
+
+def div_term(length, term_num=4):
+    max_num = length
     term_idx_arr = [int((i*max_num)/term_num) for i in range(term_num+1)]
     i = 0
     div_term_list = []
@@ -14,8 +16,8 @@ def div_term(obj, term_num=4):
     return div_term_list
 
 
-def snd_vol(obj):
-    yield_list = obj_to_yield(obj)
+def snd_vol(obj, colname=MATURITY):
+    yield_list = filt_by_col_to_flt(obj, colname)
     n = len(yield_list)
     i=1
     dy_arr = []
@@ -28,8 +30,8 @@ def snd_vol(obj):
     return math.sqrt((sum(dvy_arr)/len(dvy_arr))*252)
 
 
-def snd_avg_dff(obj):
-    yield_list = obj_to_yield(obj)
+def snd_avg_dff(obj, colname=MATURITY):
+    yield_list = filt_by_col_to_flt(obj, colname)
     i=1
     dy_arr = []
     while(i<len(yield_list)):
@@ -39,18 +41,18 @@ def snd_avg_dff(obj):
     return sum(dy_arr)/len(dy_arr)
 
 
-def snd_avg_yld(obj):
-    yield_list = obj_to_yield(obj)
+def snd_avg_yld(obj, colname=MATURITY):
+    yield_list = filt_by_col_to_flt(obj, colname)
     return sum(yield_list)/len(yield_list)
 
 
-def snd_std_yld(obj):
-    yield_list = obj_to_yield(obj)
+def snd_std_yld(obj, colname=MATURITY):
+    yield_list = filt_by_col_to_flt(obj, colname)
     return stdiv(yield_list)
 
 
-def snd_avg_std_dff(obj):
-    yield_list = obj_to_yield(obj)
+def snd_avg_std_dff(obj, colname=MATURITY):
+    yield_list = filt_by_col_to_flt(obj, colname=colname)
     i=1
     dy_arr = []
     while(i<len(yield_list)):
@@ -70,8 +72,9 @@ def stdiv(l_data):
     return sum_dev/n
 
 
-def obj_to_yield(obj):
+def filt_by_col_to_flt(obj, colname):
     li = []
     for o in obj:
-        li.append(float(o.five_year))
+        val = eval(f'o.{colname}')
+        li.append(float(val))
     return li

@@ -22,6 +22,7 @@ import re
 from bondapp.req.kis import all_type_set, RATING_TYPE
 from bondapp.fin.figure import *
 from pykrx import stock
+import pandas as pd
 
 
 NOW = datetime.datetime.now()
@@ -29,22 +30,26 @@ STR_NOW = NOW.strftime('%Y%m%d')
 STR_YST = (NOW-datetime.timedelta(days=1)).strftime('%Y%m%d')
 
 
+def _get_obj(bond_type):
+    return BondYld.objects.filter(bond_type=bond_type)
+
+
 def actPlot(type):
-    data = BondYld.objects.filter(bond_type=type)
+    data = _get_obj(type)
     str_date = data[0].date
     first = datetime.datetime.strptime(str_date, '%Y.%m.%d')
     str_date = data[len(data)-1].date
     last = datetime.datetime.strptime(str_date, '%Y.%m.%d')
     max_delta = int((last-first).days)
     x = []
-    y = []
+    avg_diff = []
     for d in data:
         str_dte = d.date
         dte = datetime.datetime.strptime(str_dte, '%Y.%m.%d')
         delta = int((last-dte).days)
         x.append(max_delta-delta)
-        y.append(float(d.five_year))
-    plt.plot(x, y, label=f'{type}')
+        avg_diff.append(float(d.five_year))
+    plt.plot(x, avg_diff, label=f'{type}')
 
     x_date = []
     arr_days = [0, int(max_delta/4), int(max_delta*2/4), int(max_delta*3/4), max_delta]
@@ -81,11 +86,11 @@ def delete_plt(idx_, date_, category=""):
 
 def make_figure_plt(type_name, *funcs, term_num=4):
     plt.clf() # plt 초기화
-    obj = BondYld.objects.filter(bond_type=type_name)
+    obj = _get_obj(type_name)
     terms = div_term(obj, term_num=term_num)
     x = [f"term{i+1}" for i in range(term_num)]
     for fi, func in enumerate(funcs):
-        y = []
+        avg_diff = []
         label = func.__name__
         label = re.sub('snd_', '', label)
         for i, tr in enumerate(terms):
@@ -93,23 +98,21 @@ def make_figure_plt(type_name, *funcs, term_num=4):
             for t in tr:
                 obj_by_term.append(obj[t])
             value = round(func(obj_by_term), 5)
-            y.append(value)
-        plt.plot(x, y, label=label)
+            avg_diff.append(value)
+        plt.plot(x, avg_diff, label=label)
         for i, v in enumerate(x):
-            plt.text(v, y[i], y[i], 
+            plt.text(v, avg_diff[i], avg_diff[i], 
             rotation=fi%2*10, weight='bold')
     plt.legend()
     return plt
 
-# df = stock.get_index_ohlcv_by_date("20161129", "20211126", "1001")
-# df['수익률'] = df['종가'] / df['종가'][0]
-# df = df['2021']
-# print(df.tail())
 
-delete_date = '20211208'
-for i, value in enumerate(RATING_TYPE):
-    plt.clf() # plt 초기화
-    # make_figure_plt(value, snd_avg_dff, snd_std_yld, snd_vol, snd_avg_yld)
-    actPlot(value)
-    update_plt(i)
-    # delete_plt(i, delete_date)
+if __name__ == "__main__":
+    # update plt 부분
+    delete_date = '20211208'
+    for i, value in enumerate(RATING_TYPE):
+        plt.clf() # plt 초기화
+        make_figure_plt(value, snd_avg_dff, snd_std_yld, snd_vol, snd_avg_yld)
+        actPlot(value)
+        update_plt(i)
+        delete_plt(i, delete_date)
