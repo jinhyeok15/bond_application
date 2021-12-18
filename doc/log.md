@@ -84,3 +84,6 @@
 + Figure 시각화 하기
 + 그래프 새로 setting하기
 > figure그래프에서 text부분 겹칠 때, value를 따로 붙이기
+
+## 12.18
++ document 내용 정리하기

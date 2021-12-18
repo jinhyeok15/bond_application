@@ -1,12 +1,12 @@
 # Bond interest rate model prediction service
 
-<https://youtu.be/bKDKo_v4P7Y>
 ## Site
 <http://jinpfo.site:8000>
 
 ## Documentation
-<a href="doc/log.md">[Log]</a>   
-<a href="doc/description.md">[Description]</a>
+
+* ### <a href="doc/description.md" style="text-decoration: underline;color:black;">Description</a>
+* ### <a href="doc/log.md" style="text-decoration: underline;color:black;">Log</a>
 
 ## Service instruction
 
