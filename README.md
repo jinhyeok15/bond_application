@@ -1,7 +1,7 @@
 # Bond interest rate model prediction service
 
 ## Site
-<http://jinpfo.site:8000>
+<http://jinpfo.site/>
 
 ## Documentation
 
