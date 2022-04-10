@@ -1,6 +1,5 @@
 <a href="../README.md">Home</a>
 # Description
-<https://youtu.be/bKDKo_v4P7Y>
 
 ## 1. Architecture
 <img src="src/ServerArchitecture.JPG" style="width:600px; height:400px">
